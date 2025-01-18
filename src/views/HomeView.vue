@@ -24,6 +24,24 @@ watch(isCSS, (value) => {
     document.body.classList.remove('no-css')
   }
 })
+
+const setCursor = (cursor: string) => {
+  document.body.style.cursor = `url(/src/assets/cursors/${cursor}), default`
+
+  document.querySelectorAll('*').forEach((el) => {
+    ;(el as HTMLElement).style.cursor = `url(/src/assets/cursors/${cursor}), auto`
+  })
+}
+
+const resetCursor = () => {
+  // Сбрасываем глобальный стиль курсора для body
+  document.body.style.cursor = 'auto'
+
+  // Сбрасываем стиль курсора для всех элементов
+  document.querySelectorAll('*').forEach((el) => {
+    ;(el as HTMLElement).style.cursor = ''
+  })
+}
 </script>
 
 <template>
@@ -44,16 +62,34 @@ watch(isCSS, (value) => {
             </app-accordion-content>
           </app-accordion-panel>
           <app-accordion-panel value="1">
-            <app-accordion-header>Фича 2</app-accordion-header>
+            <app-accordion-header>Фича 2: Слайдер</app-accordion-header>
             <app-accordion-content>
-              <p class="m-0">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-                magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci
-                velit, sed quia non numquam eius modi.
-              </p>
+              <div>
+                <p class="m-0">Слайдер это круто. Переключите слайдер и увидите что произойдет.</p>
+              </div>
+            </app-accordion-content>
+          </app-accordion-panel>
+          <app-accordion-panel value="2">
+            <app-accordion-header>Фича 3: Кастомные курсоры</app-accordion-header>
+            <app-accordion-content>
+              <div>
+                <p class="m-0">
+                  Кастомные курсоры это круто. Переключите курсор и увидите что произойдет.
+                </p>
+                <div class="flex align-items-center mt-3 gap-2">
+                  <app-button label="Сбросить" @click="resetCursor" />
+                  <app-button icon="pi pi-face-smile" @click="setCursor('nyan-cursor.png')" />
+                </div>
+              </div>
+            </app-accordion-content>
+          </app-accordion-panel>
+          <app-accordion-panel value="3">
+            <app-accordion-header>Фича 4: Тема</app-accordion-header>
+            <app-accordion-content>
+              <div>
+                <p>Тема это круто. Переключите тему и увидите что произойдет.</p>
+                <app-button class="mt-3" label="Переключить тему" />
+              </div>
             </app-accordion-content>
           </app-accordion-panel>
         </app-accordion>
